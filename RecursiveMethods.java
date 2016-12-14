@@ -70,4 +70,39 @@ public class RecursiveMethods {
 	public static int fibonacciStart(int n) {
 		return fibo(1, 0, n);
 	}
+
+	private static int linearSearch(Object[] items, Object target, int posFirst) {
+		if (posFirst == items.length) {
+			return -1;
+		} else if (target.equals(items[posFirst])) {
+			return posFirst;
+		} else {
+			return linearSearch(items, target, posFirst + 1);
+		}
+	}
+
+	public static int linearSearch(Object[] items, Object target) {
+		return linearSearch(items, target, 0);
+	}
+
+	private static int binarySearch(Object[] items, Comparable target,
+			int first, int last) {
+		if (first > last) {
+			return -1;
+		} else {
+			int middle = (first + last) / 2;
+			int compResult = target.compareTo(items[middle]);
+			if (compResult == 0) {
+				return middle;
+			} else if (compResult < 0) {
+				return binarySearch(items, target, first, middle - 1);
+			} else {
+				return binarySearch(items, target, middle + 1, last);
+			}
+		}
+	}
+
+	public static int binarySearch(Object[] items, Comparable target) {
+		return binarySearch(items, target, 0, items.length - 1);
+	}
 }
